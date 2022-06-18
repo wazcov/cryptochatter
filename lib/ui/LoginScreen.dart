@@ -8,9 +8,9 @@ import 'package:cryptochatter/form/form_button.dart';
 import 'package:cryptochatter/helper/fire_auth.dart';
 
 goToCoinsScreen(BuildContext context, User user) {
-  Navigator.of(context).pushReplacement(
-    MaterialPageRoute(
-        builder: (context) => screens.CoinsScreen(user: user)),
+  Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => screens.CoinsScreen(user: user)),
   );
 }
 
@@ -22,25 +22,37 @@ signIn(String email, String password) async {
   return user;
 }
 
-Future<FirebaseApp> _initializeFirebase() async {
-  FirebaseApp firebaseApp = await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-  return firebaseApp;
-}
-
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
-//_LoginScreenState createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
   late String email, password;
   String? emailError, passwordError;
   late Future<FirebaseApp> firebaseApp;
+
+  Future<FirebaseApp> _initializeFirebase() async {
+    FirebaseApp firebaseApp = await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+    User? user = FirebaseAuth.instance.currentUser;
+
+
+    if (user != null) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => CoinsScreen(
+            user: user,
+          ),
+        ),
+      );
+    }
+    return firebaseApp;
+  }
 
   onSubmitted(String email, String password) async {
     UserOrError userOrError = await signIn(email, password);
@@ -92,7 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
   void submit() async {
     if (validate()) {
       UserOrError userOrError = await onSubmitted(email, password);
-      if(userOrError.user != null) {
+      if (userOrError.user != null) {
         var localUser = userOrError.user;
         goToCoinsScreen(context, localUser!);
       } else {
@@ -232,7 +244,3 @@ class _LoginScreenState extends State<LoginScreen> {
     //}));
   }
 }
-
-
-
-
