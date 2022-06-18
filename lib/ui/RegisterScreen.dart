@@ -1,13 +1,15 @@
 import 'package:cryptochatter/helper/fire_auth.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:cryptochatter/form/form_button.dart';
 import 'package:cryptochatter/firebase_options.dart';
+import 'package:cryptochatter/ui/index.dart' as screens;
+
+import 'index.dart';
 
 register(String name, String email, String password) async {
-  User? user = await FireAuth.registerUsingEmailPassword(name: name, email: email, password: password);
-  return user;
+  UserOrError userOrError = await FireAuth.registerUsingEmailPassword(name: name, email: email, password: password);
+  return userOrError;
 }
 
 Future<FirebaseApp> _initializeFirebase() async {
@@ -30,8 +32,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
   late Future<FirebaseApp> firebaseApp;
 
   onSubmitted(String email, String password) async {
-    User? user = await register(email, email, password);
-    return user;
+    UserOrError userOrError = await register(email, email, password);
+    return userOrError;
   }
 
   @override
@@ -85,11 +87,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   void submit() async {
     if (validate()) {
-      User? user = await onSubmitted(email, password);
-      if(user != null) {
-        print("Registered");
+      UserOrError userOrError = await onSubmitted(email, password);
+      if(userOrError.user != null) {
+        var localUser = userOrError.user;
+        screens.goToCoinsScreen(context, localUser!);
       } else {
-        print("Not Registered");
+        print("Not Registered ${userOrError.error}");
+        setState(() {
+          passwordError = userOrError.error;
+        });
       }
     }
   }

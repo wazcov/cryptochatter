@@ -7,7 +7,7 @@ import 'package:cryptochatter/firebase_options.dart';
 import 'package:cryptochatter/form/form_button.dart';
 import 'package:cryptochatter/helper/fire_auth.dart';
 
-goToDetailPage(BuildContext context, User user) {
+goToCoinsScreen(BuildContext context, User user) {
   Navigator.of(context).pushReplacement(
     MaterialPageRoute(
         builder: (context) => screens.CoinsScreen(user: user)),
@@ -15,7 +15,7 @@ goToDetailPage(BuildContext context, User user) {
 }
 
 signIn(String email, String password) async {
-  User? user = await FireAuth.signInUsingEmailPassword(
+  UserOrError user = await FireAuth.signInUsingEmailPassword(
     email: email,
     password: password,
   );
@@ -43,8 +43,8 @@ class _LoginScreenState extends State<LoginScreen> {
   late Future<FirebaseApp> firebaseApp;
 
   onSubmitted(String email, String password) async {
-    User? user = await signIn(email, password);
-    return user;
+    UserOrError userOrError = await signIn(email, password);
+    return userOrError;
   }
 
   @override
@@ -91,11 +91,15 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void submit() async {
     if (validate()) {
-      User? user = await onSubmitted(email, password);
-      if(user != null) {
-        goToDetailPage(context, user);
+      UserOrError userOrError = await onSubmitted(email, password);
+      if(userOrError.user != null) {
+        var localUser = userOrError.user;
+        goToCoinsScreen(context, localUser!);
       } else {
         print("Invalid");
+        setState(() {
+          passwordError = userOrError.error;
+        });
       }
     }
   }

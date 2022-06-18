@@ -17,11 +17,12 @@ class FireAuth {
     FirebaseAuth.instance.signOut();
   }
 
-  static Future<User?> signInUsingEmailPassword({
+  static Future<UserOrError> signInUsingEmailPassword({
     required String email,
     required String password,
   }) async {
     FirebaseAuth auth = FirebaseAuth.instance;
+    UserOrError userOrError = UserOrError();
     User? user;
 
     try {
@@ -30,44 +31,53 @@ class FireAuth {
         password: password,
       );
       user = userCredential.user;
+      userOrError.user = user;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        print('No user found for that email.');
+        userOrError.error = 'No user found for that email.';
       } else if (e.code == 'wrong-password') {
-        print('Wrong password provided.');
+        userOrError.error = 'Wrong password provided.';
       }
+    } catch (e) {
+      userOrError.error = e.toString();
     }
 
-    return user;
+    return userOrError;
   }
 
-  static Future<User?> registerUsingEmailPassword({
+  static Future<UserOrError> registerUsingEmailPassword({
     required String name,
     required String email,
     required String password,
   }) async {
     FirebaseAuth auth = FirebaseAuth.instance;
     name = randomUsername();
+    UserOrError userOrError = UserOrError();
     User? user;
     try {
       UserCredential userCredential = await auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
-      print(userCredential);
       user = userCredential.user;
       await user!.updateDisplayName(name);
       await user.reload();
       user = auth.currentUser;
+      userOrError.user = user;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
-        print('The password provided is too weak.');
+        userOrError.error = 'The password provided is too weak.';
       } else if (e.code == 'email-already-in-use') {
-        print('The account already exists for that email.');
+        userOrError.error = 'The account already exists for that email.';
       }
     } catch (e) {
-      print(e);
+      userOrError.error = e.toString();
     }
-    return user;
+    return userOrError;
   }
+}
+
+class UserOrError {
+  User? user;
+  String? error;
 }
