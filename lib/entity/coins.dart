@@ -1,6 +1,6 @@
-class Coins {
-  final String title;
-  final String description;
+class Coin {
+  final String symbol;
+  final String name;
 
-  const Coins(this.title, this.description);
+  const Coin(this.symbol, this.name);
 }

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "428775727055",
+    "project_id": "cryptochatter-715a3",
+    "storage_bucket": "cryptochatter-715a3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:428775727055:android:ee343c1ea684b6b9337cba",
+        "android_client_info": {
+          "package_name": "com.cryptochatter.cryptochatter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "428775727055-2evo25bak2njh1rmv1r393pasnfuug6u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBEFfEtcQlYKpKqzDXyRry9mDeuUZloK7o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "428775727055-2evo25bak2njh1rmv1r393pasnfuug6u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
