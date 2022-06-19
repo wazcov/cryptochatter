@@ -9,6 +9,7 @@ void main() {
     MaterialApp(
       title: 'Passing Data',
       theme: ThemeData(
+        scaffoldBackgroundColor: const Color(0xFFEFEFEF),
         // Define the default brightness and colors.
         brightness: Brightness.light,
         primaryColor: Colors.orange,
@@ -21,9 +22,9 @@ void main() {
         // Define the default `TextTheme`. Use this to specify the default
         // text styling for headlines, titles, bodies of text, and more.
         textTheme: const TextTheme(
-          headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.w600),
-          headline6: TextStyle(fontSize: 36.0, fontWeight: FontWeight.w300),
-          bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
+          headline1: TextStyle(fontSize: 30.0, fontWeight: FontWeight.w600, color: Colors.black),
+          headline2: TextStyle(fontSize: 14.0, fontWeight: FontWeight.w300, color: Colors.black45),
+          bodyText2: TextStyle(fontSize: 12.0, fontFamily: 'Hind'),
         ),
       ),
       home: screens.LoginScreen(),

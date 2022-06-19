@@ -42,8 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
 
     if (user != null) {
-      Navigator.push(
-        context,
+      Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (context) => CoinsScreen(
             user: user,
@@ -201,8 +200,7 @@ class _LoginScreenState extends State<LoginScreen> {
             height: screenHeight * .15,
           ),
           TextButton(
-              onPressed: () => Navigator.push(
-                    context,
+              onPressed: () => Navigator.of(context).pushReplacement(
                     MaterialPageRoute(
                       builder: (_) => const CoinsScreen(),
                     ),
@@ -216,8 +214,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ))),
           TextButton(
-            onPressed: () => Navigator.push(
-              context,
+            onPressed: () => Navigator.of(context).pushReplacement(
               MaterialPageRoute(
                 builder: (_) => const screens.RegisterScreen(),
               ),

@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
 
 class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final Color backgroundColor = Colors.white;
-  final Text title;
+  final Color backgroundColor = Colors.transparent;
+  final Text? title;
   final AppBar appBar;
   final List<Widget> widgets;
 
-  const BaseAppBar({Key? key, required this.title, required this.appBar, required this.widgets})
+  BaseAppBar({Key? key, this.title, required this.appBar, required this.widgets})
       : super(key: key);
+
+  var defaultTitle =  Image.asset('assets/images/logocc.png', height: 50, width: 50);
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: title,
+      centerTitle: true,
+      title: title ?? defaultTitle,
+      elevation: 0,
       backgroundColor: backgroundColor,
       actions: widgets,
     );
