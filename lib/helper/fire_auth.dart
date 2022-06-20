@@ -1,6 +1,5 @@
 import 'package:cryptochatter/helper/RandomUsername.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 
 class FireAuth {
 
@@ -14,7 +13,7 @@ class FireAuth {
   }
 
   static void signOut() async {
-    FirebaseAuth.instance.signOut();
+    return await FirebaseAuth.instance.signOut();
   }
 
   static Future<UserOrError> signInUsingEmailPassword({

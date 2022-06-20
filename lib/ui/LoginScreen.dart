@@ -8,8 +8,7 @@ import 'package:cryptochatter/form/form_button.dart';
 import 'package:cryptochatter/helper/fire_auth.dart';
 
 goToCoinsScreen(BuildContext context, User user) {
-  Navigator.push(
-    context,
+  Navigator.of(context).pushReplacement(
     MaterialPageRoute(builder: (context) => screens.CoinsScreen(user: user)),
   );
 }
@@ -200,20 +199,6 @@ class _LoginScreenState extends State<LoginScreen> {
             height: screenHeight * .15,
           ),
           TextButton(
-              onPressed: () => Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                      builder: (_) => const CoinsScreen(),
-                    ),
-                  ),
-              child: RichText(
-                  text: TextSpan(
-                text: "Skip",
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.primary,
-                  fontWeight: FontWeight.bold,
-                ),
-              ))),
-          TextButton(
             onPressed: () => Navigator.of(context).pushReplacement(
               MaterialPageRoute(
                 builder: (_) => const screens.RegisterScreen(),
@@ -227,7 +212,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   TextSpan(
                     text: "Sign Up",
                     style: TextStyle(
-                      color: Theme.of(context).colorScheme.primary,
+                      color: Theme.of(context).colorScheme.secondary,
                       fontWeight: FontWeight.bold,
                     ),
                   ),

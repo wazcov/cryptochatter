@@ -36,6 +36,8 @@ class InputField extends StatelessWidget {
   final TextInputAction? textInputAction;
   final bool autoFocus;
   final bool obscureText;
+  final bool readOnly;
+  final String? initialValue;
 
   const InputField(
       {this.labelText,
@@ -46,6 +48,8 @@ class InputField extends StatelessWidget {
         this.textInputAction,
         this.autoFocus = false,
         this.obscureText = false,
+        this.readOnly = false,
+        this.initialValue,
         Key? key})
       : super(key: key);
 
@@ -53,16 +57,26 @@ class InputField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextField(
       autofocus: autoFocus,
+      controller: initialValue != null ? TextEditingController(text: initialValue) : null,
+      readOnly: readOnly,
+      enabled: !readOnly,
       onChanged: onChanged,
       onSubmitted: onSubmitted,
       keyboardType: keyboardType,
       textInputAction: textInputAction,
       obscureText: obscureText,
       decoration: InputDecoration(
+        // filled: readOnly,
+        // fillColor: Colors.white12,
         labelText: labelText,
         errorText: errorText,
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        border: OutlineInputBorder(
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Theme.of(context).colorScheme.primary),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Theme.of(context).colorScheme.primary),
           borderRadius: BorderRadius.circular(12),
         ),
       ),

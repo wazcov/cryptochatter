@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final Color backgroundColor = Colors.transparent;
   final Text? title;
   final AppBar appBar;
   final List<Widget> widgets;
@@ -17,7 +16,7 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
       centerTitle: true,
       title: title ?? defaultTitle,
       elevation: 0,
-      backgroundColor: backgroundColor,
+      backgroundColor: Theme.of(context).colorScheme.background,
       actions: widgets,
     );
   }

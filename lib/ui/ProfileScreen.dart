@@ -1,7 +1,10 @@
 import 'package:cryptochatter/ui/BaseAppBar.dart';
+import 'package:cryptochatter/ui/LoginScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cryptochatter/ui/index.dart' as screens;
+import 'package:cryptochatter/form/form_button.dart';
+import 'package:cryptochatter/helper/fire_auth.dart';
 
 class ProfilePage extends StatefulWidget {
   final User? user;
@@ -13,7 +16,6 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-
   @override
   void initState() {
     super.initState();
@@ -21,66 +23,46 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
-        backgroundColor: Colors.white,
         appBar: BaseAppBar(
           appBar: AppBar(),
-          widgets: <Widget>[
-            //Icon(Icons.more_vert),
-            // IconButton(
-            //   icon: const Icon(Icons.circle_rounded),
-            //   onPressed: () {
-            //     Navigator.push(
-            //       context,
-            //       MaterialPageRoute(
-            //           builder: (context) =>
-            //               screens.ProfilePage(user: widget.user)),
-            //     );
-            //   },
-            // ),
-          ],
+          widgets: const <Widget>[],
         ),
-        body: Column(children: <Widget>[
-          Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Center(
-                  child: Column(
-                    children: [
-                      Text(
-                        "Profile",
-                        style: Theme
-                            .of(context)
-                            .textTheme
-                            .headline1,
-                      ),
-                      Text(
-                        "${widget.user?.displayName}",
-                        style: Theme
-                            .of(context)
-                            .textTheme
-                            .headline2,
-                      ),
-                      SizedBox(height: 30),
-                      Text(
-                        "${widget.user?.email}",
-                        style: Theme
-                            .of(context)
-                            .textTheme
-                            .bodyText1,
-                      ),
-                      Text(
-                        "${widget.user?.displayName}",
-                        style: Theme
-                            .of(context)
-                            .textTheme
-                            .bodyText1,
-                      ),
-                    ],
-                  ))
-          )
-        ],
-        )
-    );
+        body: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: ListView(children: [
+              Center(
+                  child: Text(
+                "Profile",
+                style: Theme.of(context).textTheme.headline1,
+              )),
+              SizedBox(height: screenHeight * .075),
+              InputField(
+                onChanged: (value) {},
+                labelText: "Email",
+                initialValue: widget.user?.email,
+                readOnly: true,
+              ),
+              InputField(
+                onChanged: (value) {},
+                labelText: "Display Name",
+                initialValue: widget.user?.displayName,
+                readOnly: true,
+              ),
+              SizedBox(height: screenHeight * .20),
+              FormButton(
+                text: "Log Out",
+                onPressed: () {
+                  FireAuth.signOut();
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (context) => const LoginScreen(),
+                    ),
+                  );
+                },
+              )
+            ])));
   }
-
 }
