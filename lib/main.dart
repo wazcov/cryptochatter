@@ -6,6 +6,7 @@ void main() {
     MaterialApp(
       title: 'Passing Data',
       theme: ThemeData(
+        scaffoldBackgroundColor: Colors.white,
         colorScheme: const ColorScheme(
           background: Colors.white,
           primary: Colors.green,
@@ -17,7 +18,7 @@ void main() {
           onSurface: Colors.black45,
           error: Colors.purple,
           onError: Colors.black45,
-          onBackground: Colors.black,
+          onBackground: Color(0xFFDDDDDD),
         ),
 
         // Define the default font family.

@@ -59,7 +59,12 @@ class DetailScreen extends StatelessWidget {
         Expanded(
             child: ListView.builder(
           itemBuilder: (BuildContext context, int index) {
-            return ListTile(title: Text(messages[index].user), onTap: () {});
+            return ListTile(
+                title: Text(messages[index].user),
+                leading: FlutterLogo(size: 56.0),
+                subtitle: Text('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean bibendum velit tellus, in convallis tortor sollicitudin at. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque et posuere massa. Morbi nec turpis nec justo lacinia porta placerat non erat. Ut sagittis bibendum felis ac finibus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nunc velit dui, tempus eget pharetra id, placerat sed nisi. Cras ullamcorper erat sed elit accumsan placerat. Ut malesuada nunc vel neque convallis consectetur. Pellentesque posuere, libero quis consectetur sodales, felis erat feugiat risus, id luctus massa lorem eget eros.'),
+                trailing: Icon(Icons.thumb_up_outlined),
+                onTap: () {});
           },
           itemCount: messages == null ? 0 : messages.length,
         ))

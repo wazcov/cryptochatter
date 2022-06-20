@@ -33,11 +33,17 @@ class _ProfilePageState extends State<ProfilePage> {
         body: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: ListView(children: [
-              Center(
-                  child: Text(
-                "Profile",
-                style: Theme.of(context).textTheme.headline1,
-              )),
+              Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Center(
+                      child: Column(
+                        children: [
+                          Text(
+                            "Profile",
+                            style: Theme.of(context).textTheme.headline1,
+                          ),
+                        ],
+                      ))),
               SizedBox(height: screenHeight * .075),
               InputField(
                 onChanged: (value) {},

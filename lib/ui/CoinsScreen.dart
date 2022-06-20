@@ -1,3 +1,5 @@
+import 'package:cryptochatter/form/line_chart.dart';
+import 'package:cryptochatter/form/line_chart_simple.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cryptochatter/ui/index.dart';
@@ -39,7 +41,8 @@ class _CoinsScreenState extends State<CoinsScreen> {
         ],
       ),
       body: FutureBuilder(
-        future: DefaultAssetBundle.of(context).loadString('assets/data/coins.json'),
+        future:
+            DefaultAssetBundle.of(context).loadString('assets/data/coins.json'),
         builder: (context, snapshot) {
           Map<String, dynamic> newData = json.decode(snapshot.data.toString());
           List<dynamic> dataList = newData['coins'];
@@ -48,7 +51,19 @@ class _CoinsScreenState extends State<CoinsScreen> {
             Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Text('Trending',
-                        style: Theme.of(context).textTheme.headline2)),
+                    style: Theme.of(context).textTheme.headline2)),
+            Container(
+                margin: const EdgeInsets.symmetric(vertical: 20.0),
+                height: 200.0,
+                child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    children: const <Widget>[
+                      SimpleLineChart(),
+                      SimpleLineChart(),
+                      SimpleLineChart(),
+                      SimpleLineChart(),
+                      SimpleLineChart(),
+                    ])),
             Expanded(
                 child: ListView.builder(
               itemBuilder: (BuildContext context, int index) {
@@ -58,7 +73,8 @@ class _CoinsScreenState extends State<CoinsScreen> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => DetailScreen(user: widget.user),
+                            builder: (context) =>
+                                DetailScreen(user: widget.user),
                             settings: RouteSettings(
                               arguments: coins[index],
                             ),
@@ -73,22 +89,23 @@ class _CoinsScreenState extends State<CoinsScreen> {
                     style: Theme.of(context).textTheme.headline2)),
             Expanded(
                 child: ListView.builder(
-                  itemBuilder: (BuildContext context, int index) {
-                    return ListTile(
-                        title: Text(coins[index].symbol),
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => DetailScreen(user: widget.user),
-                                settings: RouteSettings(
-                                  arguments: coins[index],
-                                ),
-                              ));
-                        });
-                  },
-                  itemCount: coins == null ? 0 : coins.length,
-                )),
+              itemBuilder: (BuildContext context, int index) {
+                return ListTile(
+                    title: Text(coins[index].symbol),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                DetailScreen(user: widget.user),
+                            settings: RouteSettings(
+                              arguments: coins[index],
+                            ),
+                          ));
+                    });
+              },
+              itemCount: coins == null ? 0 : coins.length,
+            )),
           ]);
         },
       ),

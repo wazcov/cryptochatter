@@ -66,8 +66,6 @@ class InputField extends StatelessWidget {
       textInputAction: textInputAction,
       obscureText: obscureText,
       decoration: InputDecoration(
-        // filled: readOnly,
-        // fillColor: Colors.white12,
         labelText: labelText,
         errorText: errorText,
         floatingLabelBehavior: FloatingLabelBehavior.always,
