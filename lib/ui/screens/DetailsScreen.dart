@@ -2,8 +2,8 @@ import 'package:cryptochatter/entity/messages.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cryptochatter/entity/coins.dart';
-import 'package:cryptochatter/ui/index.dart' as screens;
-import 'BaseAppBar.dart';
+import 'package:cryptochatter/ui/screens/index.dart' as screens;
+import 'package:cryptochatter/ui/BaseAppBar.dart';
 import 'dart:convert';
 
 final messageJson =

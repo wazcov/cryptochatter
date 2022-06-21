@@ -26,28 +26,30 @@ class _SimpleLineChartState extends State<SimpleLineChart> {
             padding: EdgeInsets.all(8),
             margin: EdgeInsets.all(20),
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(2.0),
+                color: Colors.black,
+                borderRadius: BorderRadius.circular(6.0),
                 border: Border.all(color: Colors.black12, width: 2.0)),
             child: Column(
               children: <Widget>[
-                Text("ETH"),
-                Text("\$1"),
-                 Container(
-                    width: screenWidth * .125,
-                    height: screenWidth * .15,
-                    decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(18),
-                        ),
-                        color: Color(0xffffffff)),
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                          right: 1, left: 1, top: 1, bottom: 1),
-                      child: LineChart(
-                        mainData(),
-                      ),
+                Container(
+                  width: screenWidth * .125,
+                  height: screenWidth * .15,
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                        right: 1, left: 1, top: 1, bottom: 1),
+                    child: LineChart(
+                      mainData(),
                     ),
                   ),
+                ),
+                Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text("ETH",
+                        style: Theme.of(context).textTheme.bodyText1)),
+                Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text("\$1",
+                        style: Theme.of(context).textTheme.bodyText2))
               ],
             )));
   }

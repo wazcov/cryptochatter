@@ -1,8 +1,7 @@
 import 'package:cryptochatter/ui/BaseAppBar.dart';
-import 'package:cryptochatter/ui/LoginScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:cryptochatter/ui/index.dart' as screens;
+import 'package:cryptochatter/ui/screens/index.dart' as screens;
 import 'package:cryptochatter/form/form_button.dart';
 import 'package:cryptochatter/helper/fire_auth.dart';
 
@@ -64,7 +63,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   FireAuth.signOut();
                   Navigator.of(context).pushReplacement(
                     MaterialPageRoute(
-                      builder: (context) => const LoginScreen(),
+                      builder: (context) => const screens.LoginScreen(),
                     ),
                   );
                 },

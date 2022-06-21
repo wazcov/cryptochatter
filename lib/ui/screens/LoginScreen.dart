@@ -1,8 +1,7 @@
-import 'package:cryptochatter/ui/CoinsScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:cryptochatter/ui/index.dart' as screens;
+import 'package:cryptochatter/ui/screens/index.dart' as screens;
 import 'package:cryptochatter/firebase_options.dart';
 import 'package:cryptochatter/form/form_button.dart';
 import 'package:cryptochatter/helper/fire_auth.dart';
@@ -39,11 +38,10 @@ class _LoginScreenState extends State<LoginScreen> {
     );
     User? user = FirebaseAuth.instance.currentUser;
 
-
     if (user != null) {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => CoinsScreen(
+          builder: (context) => screens.CoinsScreen(
             user: user,
           ),
         ),
@@ -145,10 +143,7 @@ class _LoginScreenState extends State<LoginScreen> {
           SizedBox(height: screenHeight * .01),
           Text(
             "Sign in to continue!",
-            style: TextStyle(
-              fontSize: 18,
-              color: Colors.black.withOpacity(.6),
-            ),
+            style: Theme.of(context).textTheme.headline2,
           ),
           SizedBox(height: screenHeight * .12),
           InputField(
@@ -182,9 +177,6 @@ class _LoginScreenState extends State<LoginScreen> {
               onPressed: () {},
               child: const Text(
                 "Forgot Password?",
-                style: TextStyle(
-                  color: Colors.black,
-                ),
               ),
             ),
           ),
@@ -207,7 +199,6 @@ class _LoginScreenState extends State<LoginScreen> {
             child: RichText(
               text: TextSpan(
                 text: "I'm a new user, ",
-                style: const TextStyle(color: Colors.black),
                 children: [
                   TextSpan(
                     text: "Sign Up",

@@ -9,8 +9,10 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
       {Key? key, this.title, required this.appBar, required this.widgets})
       : super(key: key);
 
+
+
   var defaultTitle =
-      Image.asset('assets/images/logocc.png', height: 50, width: 50);
+      Image.asset('assets/images/logo.png', height: 50, width: 50);
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +23,7 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
         shape: Border(
             bottom: BorderSide(
                 color: Theme.of(context).colorScheme.onBackground, width: 1)),
-        backgroundColor: Theme.of(context).colorScheme.background,
+        backgroundColor: Colors.transparent,
         actions: widgets,
         actionsIconTheme:
             IconThemeData(color: Theme.of(context).colorScheme.primary),
